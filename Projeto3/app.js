@@ -5,17 +5,19 @@ const PORT = 8081;
 // Rota para operações matemáticas
 app.get("/operacao/:tipo", (req, res) => {
     try {
-        const { tipo } = req.params;          
-        const { numUm, numDois } = req.query; 
+        const { tipo } = req.params;  //Definirá a constante tipo como parametro         
+        const { numUm, numDois } = req.query;  //Definirá a constante numUm e numDois como query
 
-        const n1 = parseFloat(numUm);
-        const n2 = parseFloat(numDois);
+        const n1 = parseFloat(numUm); //O valor (string) de "numUm" será difinido como número e esse núemro chamará n1
+        const n2 = parseFloat(numDois); //O valor (string) de "numDois" será difinido como número e esse núemro chamará n2
+        let resultado; //Armazenar o resultado
 
+        //Identificar se n1 e n2 é um número
         if (isNaN(n1) || isNaN(n2)) {
             return res.status(400).send("Os valores devem ser números válidos.");
         }
 
-        let resultado;
+        //Identifica qual tipo de operação será utilizada e caso for, o que irá acontecer
         switch (tipo) {
             case "soma":
                 resultado = n1 + n2;

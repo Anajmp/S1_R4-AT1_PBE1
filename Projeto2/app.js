@@ -2,20 +2,20 @@ const express = require('express');
 const app = express();
 const PORT = 8081;
 
-// Rota da Calculadora
 app.get("/calculadora/:op", (req, res) => {
     try {
 
-        const { op } = req.params
-        const { numUm, numDois } = req.query;
-        const n1 = parseFloat(numUm);
-        const n2 = parseFloat(numDois);
+        const { op } = req.params //Definirá a constante op como parametro
+        const { numUm, numDois } = req.query; //Definirá as constantes numUm e numDois como query
+        const n1 = parseFloat(numUm); //O valor (string) de "numUm" será difinido como número e esse núemro chamará n1
+        const n2 = parseFloat(numDois); //O valor (string) de "numDois" será difinido como número e esse núemro chamará n2
 
         let result = 0;
         if (isNaN(n1) || isNaN(n2)) {
             return res.status(400).send("Os valores devem ser números.");
         }
 
+        //Identifica qual operação vai ser escolhida e caso seja, o que vai acontecer
         switch (op) {
             case "soma":
                 result = n1 + n2;
@@ -28,6 +28,7 @@ app.get("/calculadora/:op", (req, res) => {
                 break;
             case "divisao":
                 result = n1 / n2;
+                //se o dividendo for 0 ou se n1 ou n2 nao forem numeros, dará erro
                 if (n2 !== 0 && !isNaN(n1) && !isNaN(n2)) {
                     let result = parseFloat(numUm) / parseFloat(numDois);
 
@@ -40,42 +41,6 @@ app.get("/calculadora/:op", (req, res) => {
                 return res.send("Operação inválida");
 
         }
-        // //Soma
-        // if (operacao = "soma") {
-        //     let resultado = parseFloat(numUm) + parseFloat(numDois);
-
-        //     res.send(`Resultado da soma dos números ${numUm} e ${numDois} = ${resultado}`);
-        // } else {
-        //     return res.send(`Digite um operação válida`);
-        // }
-
-        // //Subtração
-        // if (operacao = "subtracao") {
-        //     let resultado = parseFloat(numUm) - parseFloat(numDois);
-
-        //     res.send(`Resultado da subtração dos números ${numUm} e ${numDois} = ${resultado}`);
-        // } else {
-        //     return res.send(`Digite um operação válida`);
-        // }
-
-        // //Multiplicação
-        // if (operacao = "multiplicacao") {
-        //     let resultado = parseFloat(numUm) * parseFloat(numDois);
-
-        //     res.send(`Resultado da multiplicação dos números ${numUm} e ${numDois} = ${resultado}`);
-        // } else {
-        //     return res.send(`Digite um operação válida`);
-        // }
-
-        // //Divisão
-        // if (operação = "divisao") {
-        //     let resultado = parseFloat(numUm) / parseFloat(numDois);
-
-        //     res.send(`Resultado da divisão dos números ${numUm} e ${numDois} = ${resultado}`);
-        // } else {
-        //     return res.send(`Digite um operação válida`);
-        // }
-
         res.send(`Resultado da ${op} dos números = ${result}`);
     } catch (error) {
         res.status(400).send(`${error}`);
