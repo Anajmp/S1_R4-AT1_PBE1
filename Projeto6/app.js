@@ -32,7 +32,7 @@ app.get("/imc", (req, res) => {
     }
 });
 
-// Inicia o servidor
+//SEMPRE A ÚLTIMA LINHA DO CÓDIGO
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
